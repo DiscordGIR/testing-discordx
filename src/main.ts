@@ -1,11 +1,10 @@
-import { dirname, importx } from "@discordx/importer";
+import { importx } from "@discordx/importer";
 import type { Interaction, Message } from "discord.js";
 import { IntentsBitField } from "discord.js";
 import { Client } from "discordx";
 import * as dotenv from 'dotenv';
-import { createColors } from "colorette"
-
-const { gray, yellow } = createColors({ useColor: false })
+import { gray, yellow, bold } from 'colorette'
+import logger from "./utils/logger";
 
 dotenv.config();
 
@@ -33,24 +32,14 @@ export const bot = new Client({
 });
 
 bot.once("ready", async () => {
-  // Make sure all guilds are cached
-  // await bot.guilds.fetch();
-
-  // Synchronize applications commands with Discord
-  // await bot.initApplicationCommands();
-
-  // To clear all guild commands, uncomment this line,
-  // This is useful when moving from guild commands to global commands
-  // It must only be executed once
-  //
-  //  await bot.clearApplicationCommands(
-  //    ...bot.guilds.cache.map((g) => g.id)
-  //  );
-  console.log(`Logged in as ${gray(bot.user?.tag || 'adsf')}`)
+  logger.info(`Logged in as ${yellow(bot.user?.tag || '')}`)
 });
 
 bot.on("interactionCreate", (interaction: Interaction) => {
   bot.executeInteraction(interaction);
+  if (interaction.isCommand()) {
+    logger.info(`[${bold(gray(interaction.user.tag))}] used command ${yellow("/" + interaction.commandName)}`)
+  }
 });
 
 bot.on("messageCreate", (message: Message) => {
@@ -58,8 +47,6 @@ bot.on("messageCreate", (message: Message) => {
 });
 
 async function run() {
-  // The following syntax should be used in the commonjs environment
-  //
   await importx(__dirname + "/{events,commands}/**/*.{ts,js}");
 
   // Let's start the bot
@@ -71,12 +58,12 @@ async function run() {
   const date = new Date()
   await bot.login(process.env.BOT_TOKEN);
   const time = new Date().getTime() - date.getTime()
-  console.log(`Bot launched in ${time}ms`)
-  bot.applicationCommandSlashGroups.map(group => {
-    // ├─
-    // └─
-    console.log(yellow(`├─ Slash group "${group.name}" loaded`))
-  })
+  logger.info(`Bot launched in ${yellow(time + 'ms')}`)
+  // bot.applicationCommandSlashGroups.map(group => {
+  //   // ├─
+  //   // └─
+  // })
+  logger.info(`Loaded ${yellow(bot.applicationCommandSlashes.length)} application commands!`)
 }
 
 run();
