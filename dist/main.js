@@ -59,6 +59,8 @@ const bot = new import_discordx.Client({
   }
 });
 bot.once("ready", async () => {
+  await bot.guilds.fetch();
+  await bot.initApplicationCommands();
   console.log(`Logged in as ${gray(bot.user?.tag || "adsf")}`);
 });
 bot.on("interactionCreate", (interaction) => {
