@@ -3,7 +3,7 @@ import type { Interaction, Message } from "discord.js";
 import { IntentsBitField } from "discord.js";
 import { Client } from "discordx";
 import * as dotenv from 'dotenv';
-import { gray, yellow, bold } from 'colorette'
+import { yellow, bold, blue } from "./utils/colors";
 import logger from "./utils/logger";
 
 dotenv.config();
@@ -23,7 +23,7 @@ export const bot = new Client({
   ],
 
   // Debug logs are disabled in silent mode
-  silent: false,
+  silent: true,
 
   // Configuration for @SimpleCommand
   simpleCommand: {
@@ -46,13 +46,13 @@ bot.once("ready", async () => {
   //  await bot.clearApplicationCommands(
   //    ...bot.guilds.cache.map((g) => g.id)
   //  );
-  logger.info(`Logged in as ${yellow(bot.user?.tag || '')}`);
+  logger.info(`Logged in as ${yellow(bot.user?.tag || '')}.`);
 });
 
 bot.on("interactionCreate", (interaction: Interaction) => {
   bot.executeInteraction(interaction);
   if (interaction.isCommand()) {
-    logger.info(`[${bold(gray(interaction.user.tag))}] used command ${yellow("/" + interaction.commandName)}`)
+    logger.info(`[${bold(blue(interaction.user.tag))}] used command ${yellow("/" + interaction.commandName)}.`)
   }
 });
 
@@ -65,7 +65,7 @@ async function run() {
 
   // Let's start the bot
   if (!process.env.BOT_TOKEN) {
-    throw Error("Could not find BOT_TOKEN in your environment");
+    throw Error("Could not find BOT_TOKEN in your environment.");
   }
 
   // Log in with your bot token
@@ -73,11 +73,8 @@ async function run() {
   await bot.login(process.env.BOT_TOKEN);
   const time = new Date().getTime() - date.getTime()
   logger.info(`Bot launched in ${yellow(time + 'ms')}`)
-  // bot.applicationCommandSlashGroups.map(group => {
-  //   // ├─
-  //   // └─
-  // })
-  logger.info(`Loaded ${yellow(bot.applicationCommandSlashes.length)} application commands!`)
+  logger.info(`Loaded ${yellow(bot.applicationCommandSlashes.length.toString())} application commands.`)
+  logger.info(`Loaded ${yellow(bot.events.length.toString())} event handlers.`)
 }
 
 run();
