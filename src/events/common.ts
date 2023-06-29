@@ -7,4 +7,9 @@ export class Example {
   messageDelete([message]: ArgsOf<"messageDelete">, client: Client): void {
     console.log("Message Deleted", client.user?.username, message.content);
   }
+
+  @On()
+  messageCreate([message]: ArgsOf<"messageCreate">, client: Client): void {
+    // TODO: Create user in the db if they don't exist
+  }
 }

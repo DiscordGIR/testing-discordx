@@ -5,8 +5,22 @@ import { Client } from "discordx";
 import * as dotenv from 'dotenv';
 import { yellow, bold, blue } from "./utils/colors";
 import logger from "./utils/logger";
+import { Pool } from "pg";
+import { drizzle, NodePgDatabase } from "drizzle-orm/node-postgres";
+import { D } from "drizzle-orm/query-promise.d-2e42fbc9";
 
 dotenv.config();
+
+const pool = new Pool({
+  host: process.env.PG_HOST,
+  user: process.env.PG_USER,
+  password: process.env.PG_PASS,
+  database: process.env.PG_DB,
+  idleTimeoutMillis: 30000, // think about this - since there's going to be frequent db requests maybe set this to a higher number?
+  connectionTimeoutMillis: 2000
+});
+
+export const db: NodePgDatabase = drizzle(pool);
 
 export const bot = new Client({
   // To use only guild command
@@ -32,20 +46,9 @@ export const bot = new Client({
 });
 
 bot.once("ready", async () => {
-  // Make sure all guilds are cached
   await bot.guilds.fetch();
-
-  // Synchronize applications commands with Discord
-  // await bot.clearApplicationCommands();
   await bot.initApplicationCommands();
 
-  // To clear all guild commands, uncomment this line,
-  // This is useful when moving from guild commands to global commands
-  // It must only be executed once
-  //
-  //  await bot.clearApplicationCommands(
-  //    ...bot.guilds.cache.map((g) => g.id)
-  //  );
   logger.info(`Logged in as ${yellow(bot.user?.tag || '')}.`);
 });
 
