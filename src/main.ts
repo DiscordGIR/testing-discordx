@@ -7,7 +7,6 @@ import { yellow, bold, blue } from "./utils/colors";
 import logger from "./utils/logger";
 import { Pool } from "pg";
 import { drizzle, NodePgDatabase } from "drizzle-orm/node-postgres";
-import { D } from "drizzle-orm/query-promise.d-2e42fbc9";
 
 dotenv.config();
 
