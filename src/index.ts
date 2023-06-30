@@ -1,3 +1,5 @@
+import './env.d';
+
 import { importx } from "@discordx/importer";
 import type { Interaction, Message } from "discord.js";
 import { IntentsBitField } from "discord.js";
@@ -5,12 +7,13 @@ import { Client } from "discordx";
 import * as dotenv from 'dotenv';
 import { yellow, bold, blue } from "./utils/colors";
 import logger from "./utils/logger";
-import { Pool } from "pg";
+import pg from "pg";
 import { drizzle, NodePgDatabase } from "drizzle-orm/node-postgres";
+import { fileURLToPath } from 'url';
 
 dotenv.config();
 
-const pool = new Pool({
+const pool = new pg.Pool({
   host: process.env.PG_HOST,
   user: process.env.PG_USER,
   password: process.env.PG_PASS,
@@ -63,6 +66,7 @@ bot.on("messageCreate", (message: Message) => {
 });
 
 async function run() {
+  const __dirname = fileURLToPath(new URL('.', import.meta.url));
   await importx(__dirname + "/{events,commands}/**/*.{ts,js}");
 
   // Let's start the bot

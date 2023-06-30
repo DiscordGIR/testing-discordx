@@ -1,17 +1,13 @@
 import { defineConfig } from 'tsup';
 
-export default defineConfig({
-	clean: true,
-	bundle: false,
-	dts: false,
-	entry: ['src/**/*.ts', '!src/**/*.d.ts'],
-	format: ['cjs'],
+export default defineConfig(options => ({
+	entry: ['src/index.ts'],
+	format: 'esm',
 	minify: false,
-	tsconfig: 'tsconfig.json',
-	target: 'esnext',
+	target: 'node16',
+	keepNames: true,
 	splitting: false,
 	skipNodeModulesBundle: true,
-	sourcemap: true,
-	shims: false,
-	keepNames: true
-});
+	sourcemap: options.watch ? 'inline' : true,
+	onSuccess: options.watch ? 'node --enable-source-maps dist/index.js' : undefined,
+}));

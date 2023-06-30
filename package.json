@@ -1,15 +1,14 @@
 {
   "name": "test-bot-x",
+  "type": "module",
   "version": "1.0.0",
   "private": true,
   "license": "MIT",
-  "type": "commonjs",
-  "main": "build/main.js",
   "scripts": {
-    "build": "tsup",
+    "build": "tsup --clean",
     "watch": "tsup --watch",
     "start": "node dist/main.js",
-    "dev": "tsup --watch --onSuccess \"node ./dist/main.js\""
+    "dev": "tsup --watch"
   },
   "dependencies": {
     "@discordx/importer": "^1.2.2",
