@@ -1,5 +1,5 @@
 import { InferModel, eq } from "drizzle-orm";
-import { bigint, boolean, date, integer, pgEnum, pgTable, serial, text, timestamp, varchar } from "drizzle-orm/pg-core"
+import { bigint, boolean, date, index, integer, pgEnum, pgTable, serial, text, timestamp, varchar } from "drizzle-orm/pg-core"
 import { db } from "../main";
 
 // TODO: Upsert and abstracted functions (warn function, set birthday function, etc)
@@ -51,6 +51,10 @@ const cases = pgTable("cases", {
     liftedByMod: bigint("lifted_by_mod", { mode: "bigint" }),
     liftedDate: timestamp("lifted_date"),
     liftedReason: text("lifted_reason")
+}, (table) => {
+    return {
+        userIdIdx: index("user_id_idx").on(table.userId)
+    };
 });
 
 export type Case = InferModel<typeof cases>;
