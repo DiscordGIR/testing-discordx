@@ -5,7 +5,7 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "build": "tsup --clean",
+    "build": "tsc --noEmit && tsup --clean",
     "watch": "tsup --watch",
     "start": "TZ=UTC node dist/index.js",
     "dev": "tsup --watch"
