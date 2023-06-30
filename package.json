@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsup --clean",
     "watch": "tsup --watch",
-    "start": "node dist/main.js",
+    "start": "TZ=UTC node dist/index.js",
     "dev": "tsup --watch"
   },
   "dependencies": {
