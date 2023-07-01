@@ -7,6 +7,7 @@
     "unused-imports",
     "eslint-plugin-prefer-arrow"
   ],
+  "parser": "@typescript-eslint/parser",
   "rules": {
     "import/no-extraneous-dependencies": [
       "error",
