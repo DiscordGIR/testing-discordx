@@ -1,13 +1,14 @@
 {
   "extends": [
     "airbnb-base",
-    "prettier"
+    "airbnb-typescript/base",
+    "plugin:prettier/recommended"
   ],
-  "plugins": [
-    "unused-imports",
-    "eslint-plugin-prefer-arrow"
-  ],
+  "plugins": ["unused-imports", "eslint-plugin-prefer-arrow"],
   "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
   "rules": {
     "import/no-extraneous-dependencies": [
       "error",
