@@ -1,11 +1,37 @@
 {
-	"extends": ["airbnb-base", "prettier"],
-  "import/no-extraneous-dependencies": [
-    "error", {
-       "devDependencies": false, 
-       "optionalDependencies": false, 
-       "peerDependencies": false, 
-       "packageDir": "./"
-    }
-  ]
+  "extends": [
+    "airbnb-base",
+    "prettier"
+  ],
+  "plugins": [
+    "unused-imports",
+    "eslint-plugin-prefer-arrow"
+  ],
+  "rules": {
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": false,
+        "optionalDependencies": false,
+        "peerDependencies": false,
+        "packageDir": "./"
+      }
+    ],
+    "prettier/prettier": [
+      "error",
+      {},
+      {
+        "usePrettierrc": true
+      }
+    ],
+    "unused-imports/no-unused-imports": "error",
+    "prefer-arrow/prefer-arrow-functions": [
+      "warn",
+      {
+        "disallowPrototype": true,
+        "singleReturnOnly": false,
+        "classPropertiesAllowed": false
+      }
+    ]
+  }
 }
