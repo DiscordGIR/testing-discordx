@@ -16,36 +16,36 @@ export function RoleGuard(
     }
 
     async function noPerms(arg: PermissionHandler) {
-        if(arg instanceof SimpleCommandMessage)
+        if (arg instanceof SimpleCommandMessage)
             await arg.message.reply("You don't have permission to execute this command.");
         else
             await handleReply(arg, "You don't have permission to execute this command.");
     }
 
-    return async function (arg: PermissionHandler, client: Client, next: Next) {
+    return async function(arg: PermissionHandler, client: Client, next: Next) {
         let guild: Guild | null = null;
         let member: GuildMember | null = null;
 
         if (arg instanceof SimpleCommandMessage) {
-            if(arg.message.inGuild()) {
+            if (arg.message.inGuild()) {
                 guild = arg.message.guild;
                 member = arg.message.member;
             }
         } else {
             guild = arg.guild;
-            if(arg.member instanceof GuildMember)
+            if (arg.member instanceof GuildMember)
                 member = arg.member;
         }
 
-        if(!guild || !member) {
-            if(arg instanceof SimpleCommandMessage)
+        if (!guild || !member) {
+            if (arg instanceof SimpleCommandMessage)
                 await arg.message.reply("Error");
             else
                 handleReply(arg, "Error");
         }
 
         const isAllowed = member?.roles.cache.has(roleID);
-        if(isAllowed)
+        if (isAllowed)
             return next();
         else
             return noPerms(arg);
