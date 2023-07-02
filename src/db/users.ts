@@ -43,9 +43,6 @@ export const updateUser = async (columns: User): Promise<User[]> => {
 };
 
 export const findUser = async (id: bigint): Promise<User> => {
-  const result: User[] = await db
-    .select()
-    .from(users)
-    .where(eq(users.id, id));
+  const result: User[] = await db.select().from(users).where(eq(users.id, id));
   return result[0];
 };

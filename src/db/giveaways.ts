@@ -25,22 +25,24 @@ const giveaways = pgTable('giveaways', {
 export type Giveaway = InferModel<typeof giveaways>;
 export type NewGiveaway = InferModel<typeof giveaways, 'insert'>;
 
-export async function insertGiveaway(giveaway: NewGiveaway) {
+export const insertGiveaway = async (giveaway: NewGiveaway) => {
   await db.insert(giveaways).values(giveaway);
-}
+};
 
-export async function updateGiveaway(giveaway: Giveaway): Promise<Giveaway[]> {
-  return await db
+export const updateGiveaway = async (
+  giveaway: Giveaway
+): Promise<Giveaway[]> => {
+  return db
     .update(giveaways)
     .set(giveaway)
     .where(eq(giveaways.id, giveaway.id))
     .returning();
-}
+};
 
-export async function findGiveaway(id: number) {
+export const findGiveaway = async (id: number) => {
   const result: Giveaway[] = await db
     .select()
     .from(giveaways)
     .where(eq(giveaways.id, id));
   return result[0];
-}
+};

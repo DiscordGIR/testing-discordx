@@ -1,7 +1,18 @@
 version: "3"
 services:
-  app:
-    build: .
-    command: node build/main.js
+  # app:
+  #   build: .
+  #   command: node build/main.js
+  #   environment:
+  #     - BOT_TOKEN=${BOT_TOKEN}
+
+  db:
+    image: postgres:12.1-alpine
     environment:
-      - BOT_TOKEN=${BOT_TOKEN}
+      - POSTGRES_USER=${PG_USER}
+      - POSTGRES_PASSWORD=${PG_PASS}
+      - POSTGRES_DB=${PG_DB}
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
