@@ -4,7 +4,11 @@
     "airbnb-typescript/base",
     "plugin:prettier/recommended"
   ],
-  "plugins": ["unused-imports", "eslint-plugin-prefer-arrow"],
+  "plugins": [
+    "prettier",
+    "unused-imports",
+    "eslint-plugin-prefer-arrow"
+  ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "project": "./tsconfig.json"
@@ -19,6 +23,8 @@
         "packageDir": "./"
       }
     ],
+    "import/extensions": "off",
+    "import/order": "off",
     "prettier/prettier": [
       "error",
       {},
