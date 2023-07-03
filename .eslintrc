@@ -4,11 +4,7 @@
     "airbnb-typescript/base",
     "plugin:prettier/recommended"
   ],
-  "plugins": [
-    "prettier",
-    "unused-imports",
-    "eslint-plugin-prefer-arrow"
-  ],
+  "plugins": ["prettier", "unused-imports", "eslint-plugin-prefer-arrow"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "project": "./tsconfig.json"
@@ -40,6 +36,7 @@
         "singleReturnOnly": false,
         "classPropertiesAllowed": false
       }
-    ]
+    ],
+    "class-methods-use-this": 0
   }
 }
