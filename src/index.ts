@@ -7,11 +7,10 @@ import { IntentsBitField } from 'discord.js';
 import { Client } from 'discordx';
 import * as dotenv from 'dotenv';
 import { drizzle } from 'drizzle-orm/neon-http';
+import { migrate } from 'drizzle-orm/neon-http/migrator';
 import path from 'path';
-import { users } from './db/users';
 import { blue, bold, yellow } from './utils/colors';
 import logger from './utils/logger';
-import { migrate } from 'drizzle-orm/neon-http/migrator';
 
 dotenv.config();
 neonConfig.fetchConnectionCache = true;
@@ -19,7 +18,7 @@ neonConfig.fetchConnectionCache = true;
 const sql = neon(process.env.NEON_URL);
 
 export const db = drizzle(sql);
-await migrate(db, { migrationsFolder: "drizzle" });
+await migrate(db, { migrationsFolder: 'drizzle' });
 
 export const bot = new Client({
   // To use only guild command

@@ -12,6 +12,7 @@ import {
 
 export const tags = pgTable('tags', {
   id: serial('id').notNull().primaryKey(),
+  guild_id: bigint('guild_id', { mode: 'bigint' }).notNull(),
   name: varchar('name', { length: 50 }).notNull(),
   creator_id: bigint('creator_id', { mode: 'bigint' }).notNull(),
   created_on: timestamp('created_on').notNull(),

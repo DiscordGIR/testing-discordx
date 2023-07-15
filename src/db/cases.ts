@@ -19,6 +19,7 @@ export const cases = pgTable(
   {
     case_id: serial('case_id').notNull().primaryKey(),
     user_id: bigint('user_id', { mode: 'bigint' }).notNull(),
+    guild_id: bigint('guild_id', { mode: 'bigint' }).notNull(),
     type: varchar('type', {
       length: 15,
       enum: ['warn', 'kick', 'ban', 'mute'],

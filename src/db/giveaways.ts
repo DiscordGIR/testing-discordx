@@ -13,6 +13,7 @@ import {
 
 export const giveaways = pgTable('giveaways', {
   id: serial('id').notNull().primaryKey(),
+  guild_id: bigint('guild_id', { mode: 'bigint' }).notNull(),
   prize: text('prize').notNull(),
   number_winners: integer('number_winners').notNull(),
   sponsor_id: bigint('sponsorId', { mode: 'bigint' }).notNull(),

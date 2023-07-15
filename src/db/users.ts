@@ -16,6 +16,7 @@ import {
 export const users = pgTable('users', {
   // snowflakes are above 2^53 so we use bigint mode instead of number mode
   id: bigint('id', { mode: 'bigint' }).notNull().primaryKey(),
+  guild_id: bigint('guild_id', { mode: 'bigint' }).notNull(),
   is_clem: boolean('is_clem').default(false),
   xp_frozen: boolean('xp_frozen').default(false),
   warn_kicked: boolean('warn_kicked').default(false),

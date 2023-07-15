@@ -1,6 +1,13 @@
 import { db } from '@/index';
 import { InferModel, eq } from 'drizzle-orm';
-import { boolean, integer, pgTable, serial, text } from 'drizzle-orm/pg-core';
+import {
+  bigint,
+  boolean,
+  integer,
+  pgTable,
+  serial,
+  text,
+} from 'drizzle-orm/pg-core';
 
 // Filter words
 
