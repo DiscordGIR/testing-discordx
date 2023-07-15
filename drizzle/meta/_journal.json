@@ -1,0 +1,27 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1689428950628,
+      "tag": "0000_misty_reavers",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1689429211283,
+      "tag": "0001_open_invaders",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1689454851667,
+      "tag": "0002_tiresome_night_nurse",
+      "breakpoints": true
+    }
+  ]
+}

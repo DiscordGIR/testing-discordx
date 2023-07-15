@@ -16,15 +16,15 @@ import {
 export const users = pgTable('users', {
   // snowflakes are above 2^53 so we use bigint mode instead of number mode
   id: bigint('id', { mode: 'bigint' }).notNull().primaryKey(),
-  isClem: boolean('is_clem').default(false),
-  xpFrozen: boolean('xp_frozen').default(false),
-  warnKicked: boolean('warn_kicked').default(false),
-  raidVerified: boolean('raid_verified').default(false),
+  is_clem: boolean('is_clem').default(false),
+  xp_frozen: boolean('xp_frozen').default(false),
+  warn_kicked: boolean('warn_kicked').default(false),
+  raid_verified: boolean('raid_verified').default(false),
   xp: integer('xp').default(0),
-  warnPoints: integer('warn_points').default(0),
+  warn_points: integer('warn_points').default(0),
   timezone: varchar('timezone'),
   birthday: date('birthday'),
-  stickyRoles: bigint('sticky_roles', { mode: 'bigint' }).array(),
+  sticky_roles: bigint('sticky_roles', { mode: 'bigint' }).array(),
 });
 
 export type User = InferModel<typeof users>; // what gets returned when queried

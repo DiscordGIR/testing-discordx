@@ -1,15 +1,17 @@
 import { db } from '@/index';
 import { InferModel, eq } from 'drizzle-orm';
-import { boolean, pgTable, serial, text } from 'drizzle-orm/pg-core';
+import { boolean, integer, pgTable, serial, text } from 'drizzle-orm/pg-core';
 
 // Filter words
 
 export const filterTable = pgTable('filter_words', {
   id: serial('id').notNull().primaryKey(),
+  guild_id: bigint('guild_id', { mode: 'bigint' }).notNull(),
   word: text('word').notNull(),
   notify: boolean('notify').default(false),
-  falsePositive: boolean('false_positive').default(false),
+  false_positive: boolean('false_positive').default(false),
   piracy: boolean('piracy').default(false),
+  bypass: integer('bypass').notNull(),
 });
 
 export type FilterWord = InferModel<typeof filterTable>;

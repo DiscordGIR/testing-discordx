@@ -11,15 +11,15 @@ import {
 
 // Giveaways
 
-const giveaways = pgTable('giveaways', {
+export const giveaways = pgTable('giveaways', {
   id: serial('id').notNull().primaryKey(),
   prize: text('prize').notNull(),
-  numberWinners: integer('number_winners').notNull(),
-  sponsorId: bigint('sponsorId', { mode: 'bigint' }).notNull(),
+  number_winners: integer('number_winners').notNull(),
+  sponsor_id: bigint('sponsorId', { mode: 'bigint' }).notNull(),
   channel: bigint('channel', { mode: 'bigint' }).notNull(),
-  endTime: timestamp('end_time').notNull(),
+  end_time: timestamp('end_time').notNull(),
   entries: bigint('entries', { mode: 'bigint' }).array(),
-  previousWinners: bigint('previous_winners', { mode: 'bigint' }).array(),
+  previous_winners: bigint('previous_winners', { mode: 'bigint' }).array(),
 });
 
 export type Giveaway = InferModel<typeof giveaways>;

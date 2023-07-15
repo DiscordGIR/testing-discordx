@@ -1,0 +1,1 @@
+ALTER TABLE "filter_words" ADD COLUMN "bypass" integer NOT NULL;

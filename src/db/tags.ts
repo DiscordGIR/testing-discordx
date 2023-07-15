@@ -10,12 +10,12 @@ import {
 
 // Tags
 
-const tags = pgTable('tags', {
+export const tags = pgTable('tags', {
   id: serial('id').notNull().primaryKey(),
   name: varchar('name', { length: 50 }).notNull(),
-  creatorId: bigint('creator_id', { mode: 'bigint' }).notNull(),
-  createdOn: timestamp('created_on').notNull(),
-  useCount: integer('use_count').default(0),
+  creator_id: bigint('creator_id', { mode: 'bigint' }).notNull(),
+  created_on: timestamp('created_on').notNull(),
+  use_count: integer('use_count').default(0),
   image: text('image'),
-  buttonLinks: text('button_links').array(),
+  button_links: text('button_links').array(),
 });

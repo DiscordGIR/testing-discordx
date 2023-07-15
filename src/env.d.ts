@@ -6,5 +6,6 @@ declare namespace NodeJS {
     PG_USER: string;
     PG_PASS: string;
     PG_DB: string;
+    NEON_URL: string;
   }
 }

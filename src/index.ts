@@ -1,29 +1,25 @@
 import './env.d';
 
-import { importx } from '@discordx/importer';
+import { dirname, importx } from '@discordx/importer';
+import { neon, neonConfig } from '@neondatabase/serverless';
 import type { Interaction, Message } from 'discord.js';
 import { IntentsBitField } from 'discord.js';
 import { Client } from 'discordx';
 import * as dotenv from 'dotenv';
-import { NodePgDatabase, drizzle } from 'drizzle-orm/node-postgres';
+import { drizzle } from 'drizzle-orm/neon-http';
 import path from 'path';
-import pg from 'pg';
-import { fileURLToPath } from 'url';
+import { users } from './db/users';
 import { blue, bold, yellow } from './utils/colors';
 import logger from './utils/logger';
+import { migrate } from 'drizzle-orm/neon-http/migrator';
 
 dotenv.config();
+neonConfig.fetchConnectionCache = true;
 
-const pool = new pg.Pool({
-  host: process.env.PG_HOST,
-  user: process.env.PG_USER,
-  password: process.env.PG_PASS,
-  database: process.env.PG_DB,
-  idleTimeoutMillis: 30000, // think about this - since there's going to be frequent db requests maybe set this to a higher number?
-  connectionTimeoutMillis: 2000,
-});
+const sql = neon(process.env.NEON_URL);
 
-export const db: NodePgDatabase = drizzle(pool);
+export const db = drizzle(sql);
+await migrate(db, { migrationsFolder: "drizzle" });
 
 export const bot = new Client({
   // To use only guild command
@@ -72,7 +68,7 @@ bot.on('messageCreate', (message: Message) => {
 
 const run = async () => {
   // eslint-disable-next-line no-underscore-dangle, @typescript-eslint/naming-convention
-  const __dirname = fileURLToPath(new URL('.', import.meta.url));
+  const __dirname = dirname(import.meta.url);
   await importx(path.join(__dirname, '/{events,commands}/**/*.{ts,js}'));
 
   // Let's start the bot

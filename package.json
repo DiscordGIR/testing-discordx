@@ -8,17 +8,19 @@
     "build": "tsc --noEmit && tsup --clean",
     "watch": "tsup --watch",
     "start": "TZ=UTC node dist/index.js",
-    "dev": "tsup --watch"
+    "dev": "tsup --watch",
+    "generate": "drizzle-kit generate:pg"
   },
   "dependencies": {
     "@discordx/importer": "^1.2.2",
     "@discordx/pagination": "^3.4.1",
     "@discordx/utilities": "^5.2.1",
+    "@neondatabase/serverless": "^0.5.2",
     "colorette": "^2.0.20",
     "discord.js": "^14.11.0",
     "discordx": "^11.7.6",
     "dotenv": "^16.3.1",
-    "drizzle-orm": "^0.27.0",
+    "drizzle-orm": "^0.27.2",
     "pg": "^8.11.1",
     "pino": "^8.14.1",
     "pino-pretty": "^10.0.0"
@@ -28,7 +30,7 @@
     "@types/pg": "^8.10.2",
     "@typescript-eslint/eslint-plugin": "^5.60.1",
     "@typescript-eslint/parser": "^5.60.1",
-    "drizzle-kit": "^0.19.3",
+    "drizzle-kit": "^0.19.5",
     "eslint": "^8.43.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-airbnb-typescript": "^17.0.0",
