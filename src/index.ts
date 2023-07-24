@@ -1,5 +1,3 @@
-import './env.d';
-
 import { dirname, importx } from '@discordx/importer';
 import type { Interaction, Message } from 'discord.js';
 import { IntentsBitField } from 'discord.js';
@@ -8,8 +6,8 @@ import * as dotenv from 'dotenv';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import path from 'path';
 import pg from 'pg';
+import runMigrate from './db/migrations';
 import { blue, bold, yellow } from './utils/colors';
-import config from './utils/config';
 import logger from './utils/logger';
 
 dotenv.config();
@@ -71,7 +69,11 @@ bot.on('messageCreate', (message: Message) => {
 const run = async () => {
   // connect to database
   await client.connect();
-  // await migrate(db, { migrationsFolder: 'drizzle' });
+  logger.info('Connected to database!');
+
+  if (process.env.NODE_ENV === 'development') {
+    runMigrate(db);
+  }
 
   // eslint-disable-next-line no-underscore-dangle, @typescript-eslint/naming-convention
   const __dirname = dirname(import.meta.url);

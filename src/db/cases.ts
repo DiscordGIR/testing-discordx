@@ -51,7 +51,7 @@ export const updateCase = async (caseToUpdate: Case): Promise<Case[]> => {
   return db
     .update(cases)
     .set(caseToUpdate)
-    .where(eq(cases.caseId, caseToUpdate.caseId))
+    .where(eq(cases.case_id, caseToUpdate.case_id))
     .returning();
 };
 
@@ -59,6 +59,6 @@ export const findCase = async (id: number) => {
   const result: Case[] = await db
     .select()
     .from(cases)
-    .where(eq(cases.caseId, id));
+    .where(eq(cases.case_id, id));
   return result[0];
 };

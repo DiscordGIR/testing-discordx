@@ -1,99 +1,32 @@
-<div>
-  <p align="center">
-    <a href="https://discordx.js.org" target="_blank" rel="nofollow">
-      <img src="https://discordx.js.org/discordx.svg" width="546" />
-    </a>
-  </p>
-  <p align="center">
-    <a href="https://discordx.js.org/discord"
-      ><img
-        src="https://img.shields.io/discord/874802018361950248?color=5865F2&logo=discord&logoColor=white"
-        alt="Discord server"
-    /></a>
-    <a href="https://www.npmjs.com/package/discordx"
-      ><img
-        src="https://img.shields.io/npm/v/discordx.svg?maxAge=3600"
-        alt="NPM version"
-    /></a>
-    <a href="https://www.npmjs.com/package/discordx"
-      ><img
-        src="https://img.shields.io/npm/dt/discordx.svg?maxAge=3600"
-        alt="NPM downloads"
-    /></a>
-    <a href="https://github.com/discordx-ts/discordx/actions"
-      ><img
-        src="https://github.com/discordx-ts/discordx/workflows/Build/badge.svg"
-        alt="Build status"
-    /></a>
-    <a href="https://www.paypal.me/vijayxmeena"
-      ><img
-        src="https://img.shields.io/badge/donate-paypal-F96854.svg"
-        alt="paypal"
-    /></a>
-  </p>
-  <p align="center">
-    <b> Create a discord bot with TypeScript and Decorators! </b>
-  </p>
-</div>
+# GIR.ts
 
-# 📖 Introduction
-
-A starter template equipped with several interaction commands and one event.
-
-# 🏗 Development
-
+## Development
 ```
-npm install
-npm run dev
+pnpm i
 ```
 
-If you want to use [Nodemon](https://nodemon.io/) to auto-reload while in development:
-
+set up `.env` file
 ```
-npm run watch
-```
-
-# 💻 Production
-
-```
-npm install --production
-npm run build
-npm run start
+BOT_TOKEN=""
+MAIN_GUILD_ID=""
+DB_CONNECTION_STRING=""
 ```
 
-# 🐋 Docker
+set up `gir.config.json` based on `gir.config.example.json`
 
-To start your application:
-
-```
-docker-compose up -d
-```
-
-To shut down your application:
 
 ```
-docker-compose down
+pnpm dev
 ```
 
-To view your application's logs:
+## Migrations
+When you make a change to the database schema, you need to generate a migration file. To do this, run the following command:
+```
+pnpm generate
+```
+
+Migrations are run on development every time you start the bot. On production, you can run the following command, but ideally have this as a build step:
 
 ```
-docker-compose logs
+pnpm migrate
 ```
-
-For the full command list please view the [Docker Documentation](https://docs.docker.com/engine/reference/commandline/cli/).
-
-# 📜 Documentation
-
-- [discordx.js.org](https://discordx.js.org)
-- [Tutorials (dev.to)](https://dev.to/samarmeena/series/14317)
-
-# ☎️ Need help?
-
-- [Check frequently asked questions](https://discordx.js.org/docs/faq)
-- [Check examples](https://github.com/discordx-ts/discordx/tree/main/packages/discordx/examples)
-- Ask in the community [Discord server](https://discordx.js.org/discord)
-
-# 💖 Thank you
-
-You can support [discordx](https://www.npmjs.com/package/discordx) by giving it a [GitHub](https://github.com/discordx-ts/discordx) star.
