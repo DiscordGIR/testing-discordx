@@ -18,7 +18,6 @@ neonConfig.fetchConnectionCache = true;
 const sql = neon(process.env.NEON_URL);
 
 export const db = drizzle(sql);
-await migrate(db, { migrationsFolder: 'drizzle' });
 
 export const bot = new Client({
   // To use only guild command
@@ -66,6 +65,8 @@ bot.on('messageCreate', (message: Message) => {
 });
 
 const run = async () => {
+  await migrate(db, { migrationsFolder: 'drizzle' });
+
   // eslint-disable-next-line no-underscore-dangle, @typescript-eslint/naming-convention
   const __dirname = dirname(import.meta.url);
   await importx(path.join(__dirname, '/{events,commands}/**/*.{ts,js}'));
