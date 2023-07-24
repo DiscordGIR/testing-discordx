@@ -1,0 +1,1 @@
+ALTER TABLE "tags" ADD COLUMN "creator_tag" varchar(50) NOT NULL;

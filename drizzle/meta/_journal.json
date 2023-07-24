@@ -29,6 +29,20 @@
       "when": 1689455451296,
       "tag": "0003_wakeful_skullbuster",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1689963173063,
+      "tag": "0004_slippery_hex",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1690200752391,
+      "tag": "0005_burly_night_thrasher",
+      "breakpoints": true
     }
   ]
 }
