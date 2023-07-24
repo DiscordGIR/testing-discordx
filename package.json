@@ -15,7 +15,6 @@
     "@discordx/importer": "^1.2.2",
     "@discordx/pagination": "^3.4.1",
     "@discordx/utilities": "^5.2.1",
-    "@neondatabase/serverless": "^0.5.2",
     "colorette": "^2.0.20",
     "discord.js": "^14.11.0",
     "discordx": "^11.7.6",

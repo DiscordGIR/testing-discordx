@@ -1,23 +1,27 @@
 import './env.d';
 
 import { dirname, importx } from '@discordx/importer';
-import { neon, neonConfig } from '@neondatabase/serverless';
 import type { Interaction, Message } from 'discord.js';
 import { IntentsBitField } from 'discord.js';
 import { Client } from 'discordx';
 import * as dotenv from 'dotenv';
-import { drizzle } from 'drizzle-orm/neon-http';
-import { migrate } from 'drizzle-orm/neon-http/migrator';
+import { drizzle } from 'drizzle-orm/node-postgres';
 import path from 'path';
+import pg from 'pg';
+import tags from './db/tags';
 import { blue, bold, yellow } from './utils/colors';
 import logger from './utils/logger';
 
 dotenv.config();
-neonConfig.fetchConnectionCache = true;
 
-const sql = neon(process.env.NEON_URL);
+const client = new pg.Client({
+  connectionString: process.env.DB_CONNECTION_STRING,
+  ssl: {
+    rejectUnauthorized: false,
+  },
+});
 
-export const db = drizzle(sql);
+export const db = drizzle(client);
 
 export const bot = new Client({
   // To use only guild command
@@ -65,7 +69,9 @@ bot.on('messageCreate', (message: Message) => {
 });
 
 const run = async () => {
-  await migrate(db, { migrationsFolder: 'drizzle' });
+  // connect to database
+  await client.connect();
+  // await migrate(db, { migrationsFolder: 'drizzle' });
 
   // eslint-disable-next-line no-underscore-dangle, @typescript-eslint/naming-convention
   const __dirname = dirname(import.meta.url);
