@@ -8,8 +8,8 @@ import * as dotenv from 'dotenv';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import path from 'path';
 import pg from 'pg';
-import tags from './db/tags';
 import { blue, bold, yellow } from './utils/colors';
+import config from './utils/config';
 import logger from './utils/logger';
 
 dotenv.config();
