@@ -1,7 +1,13 @@
+/* eslint-disable import/no-extraneous-dependencies */
+import { globby } from 'globby';
+import { join } from 'path';
 import { defineConfig } from 'tsup';
+import { fileURLToPath } from 'url';
 
+const path = fileURLToPath(new URL('.', import.meta.url));
+const paths = await globby(join(path, 'src/{events,commands}/**/*.{ts,js}'));
 export default defineConfig((options) => ({
-  entry: ['src/index.ts'],
+  entry: ['src/index.ts', ...paths],
   format: 'esm',
   minify: false,
   target: 'node16',
