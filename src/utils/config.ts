@@ -34,7 +34,8 @@ const ConfigSchema = z.object({
     boosterEmojiRequests: z.string(),
   }),
   misc: z.object({
-    blootoothServerId: z.string(),
+    blootoothGuildId: z.string(),
+    mainGuildId: z.string(),
   }),
 });
 

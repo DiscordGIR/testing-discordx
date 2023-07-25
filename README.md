@@ -8,7 +8,6 @@ pnpm i
 set up `.env` file
 ```
 BOT_TOKEN=""
-MAIN_GUILD_ID=""
 DB_CONNECTION_STRING=""
 ```
 
