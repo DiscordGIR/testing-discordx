@@ -50,6 +50,13 @@
       "when": 1690282629510,
       "tag": "0006_productive_richard_fisk",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "5",
+      "when": 1690293537590,
+      "tag": "0007_sparkling_scarlet_witch",
+      "breakpoints": true
     }
   ]
 }
