@@ -1,3 +1,5 @@
+import config from '@/utils/config';
+import logger from '@/utils/services/logger';
 import { dirname, importx } from '@discordx/importer';
 import type { Interaction, Message } from 'discord.js';
 import { IntentsBitField } from 'discord.js';
@@ -7,13 +9,12 @@ import path from 'path';
 import runMigrate from './db/migrations';
 import { blue, bold, yellow } from './utils/colors';
 import db, { initializeDbConnection } from './utils/services/db';
-import logger from './utils/services/logger';
 
 dotenv.config();
 
 const bot = new Client({
   // To use only guild command
-  botGuilds: [process.env.MAIN_GUILD_ID],
+  botGuilds: [config.misc.mainGuildId],
 
   // Discord intents
   intents: [
@@ -38,7 +39,20 @@ bot.once('ready', async () => {
   await bot.guilds.fetch();
   await bot.initApplicationCommands();
 
+  logger.info('');
   logger.info(`Logged in as ${yellow(bot.user?.tag || '')}.`);
+
+  const mainGuild = bot.guilds.cache.get(config.misc.mainGuildId);
+  if (!mainGuild) {
+    throw Error(
+      `Could not find main guild with ID ${config.misc.mainGuildId}.`
+    );
+  }
+  logger.info(
+    `GIR is running in ${yellow(mainGuild.name)} with ${yellow(
+      mainGuild.memberCount.toString()
+    )} members!`
+  );
 });
 
 bot.on('interactionCreate', (interaction: Interaction) => {
@@ -76,14 +90,14 @@ const run = async () => {
   // Log in with your bot token
   const date = new Date();
   await bot.login(process.env.BOT_TOKEN);
-  const time = new Date().getTime() - date.getTime();
-  logger.info(`Bot launched in ${yellow(`${time}ms`)}`);
   logger.info(
     `Loaded ${yellow(
       bot.applicationCommandSlashes.length.toString()
     )} application commands.`
   );
   logger.info(`Loaded ${yellow(bot.events.length.toString())} event handlers.`);
+  const time = new Date().getTime() - date.getTime();
+  logger.info(`Setup complete in ${yellow(`${time}ms`)}`);
 };
 
 run();
