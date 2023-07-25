@@ -1,6 +1,10 @@
 import runMigrate from '@/db/migrations';
+import logger from '@/utils/logger';
+import * as dotenv from 'dotenv';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import pg from 'pg';
+
+dotenv.config();
 
 (async () => {
   const client = new pg.Client({
@@ -9,8 +13,14 @@ import pg from 'pg';
       rejectUnauthorized: false,
     },
   });
+  await client.connect();
 
   const db = drizzle(client);
-  await runMigrate(db);
-  await client.end();
+  try {
+    await runMigrate(db);
+  } catch (error) {
+    logger.error('Error running migrations:', error);
+  } finally {
+    await client.end();
+  }
 })();
