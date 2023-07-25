@@ -3,25 +3,15 @@ import type { Interaction, Message } from 'discord.js';
 import { IntentsBitField } from 'discord.js';
 import { Client } from 'discordx';
 import * as dotenv from 'dotenv';
-import { drizzle } from 'drizzle-orm/node-postgres';
 import path from 'path';
-import pg from 'pg';
 import runMigrate from './db/migrations';
 import { blue, bold, yellow } from './utils/colors';
-import logger from './utils/logger';
+import db, { initializeDbConnection } from './utils/services/db';
+import logger from './utils/services/logger';
 
 dotenv.config();
 
-const client = new pg.Client({
-  connectionString: process.env.DB_CONNECTION_STRING,
-  ssl: {
-    rejectUnauthorized: false,
-  },
-});
-
-export const db = drizzle(client);
-
-export const bot = new Client({
+const bot = new Client({
   // To use only guild command
   botGuilds: [process.env.MAIN_GUILD_ID],
 
@@ -68,8 +58,7 @@ bot.on('messageCreate', (message: Message) => {
 
 const run = async () => {
   // connect to database
-  await client.connect();
-  logger.info('Connected to database!');
+  await initializeDbConnection();
 
   if (process.env.NODE_ENV === 'development') {
     runMigrate(db);

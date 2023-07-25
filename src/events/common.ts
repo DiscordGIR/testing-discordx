@@ -1,4 +1,4 @@
-import logger from '@/utils/logger';
+import logger from '@/utils/services/logger';
 import type { ArgsOf, Client } from 'discordx';
 import { Discord, On } from 'discordx';
 

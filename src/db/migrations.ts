@@ -1,4 +1,4 @@
-import logger from '@/utils/logger';
+import logger from '@/utils/services/logger';
 import { NodePgDatabase } from 'drizzle-orm/node-postgres';
 import { migrate } from 'drizzle-orm/node-postgres/migrator';
 

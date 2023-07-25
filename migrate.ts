@@ -1,5 +1,5 @@
 import runMigrate from '@/db/migrations';
-import logger from '@/utils/logger';
+import logger from '@/utils/services/logger';
 import * as dotenv from 'dotenv';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import pg from 'pg';

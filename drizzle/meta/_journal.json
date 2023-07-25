@@ -43,6 +43,13 @@
       "when": 1690200752391,
       "tag": "0005_burly_night_thrasher",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1690282629510,
+      "tag": "0006_productive_richard_fisk",
+      "breakpoints": true
     }
   ]
 }
