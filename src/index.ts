@@ -1,7 +1,7 @@
 import runMigrate from '@/db/migrations';
 import { blue, bold, yellow } from '@/utils/colors';
 import config from '@/utils/config';
-import db, { initializeDbConnection } from '@/utils/services/db';
+import { getDatabase, initializeDbConnection } from '@/utils/services/db';
 import logger from '@/utils/services/logger';
 import { dirname, importx } from '@discordx/importer';
 import type { Interaction, Message } from 'discord.js';
@@ -75,7 +75,7 @@ const run = async () => {
   await initializeDbConnection();
 
   if (process.env.NODE_ENV === 'development') {
-    runMigrate(db);
+    runMigrate(getDatabase());
   }
 
   // eslint-disable-next-line no-underscore-dangle, @typescript-eslint/naming-convention

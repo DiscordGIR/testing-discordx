@@ -1,7 +1,7 @@
 import { guild } from '@/db/guildConfig';
 import * as dotenv from 'dotenv';
 import { eq } from 'drizzle-orm';
-import { drizzle } from 'drizzle-orm/node-postgres';
+import { NodePgDatabase, drizzle } from 'drizzle-orm/node-postgres';
 import pg from 'pg';
 import { yellow } from '../colors';
 import config from '../config';
@@ -15,7 +15,7 @@ const client = new pg.Client({
   },
 });
 
-const db = drizzle(client);
+let db: NodePgDatabase | null = null;
 
 export const initializeDbConnection = async () => {
   await client.connect();
@@ -24,6 +24,8 @@ export const initializeDbConnection = async () => {
       client.database ?? 'unknown database'
     )} as ${yellow(client.user ?? 'unknown user')}@${yellow(client.host)}!`
   );
+
+  db = drizzle(client);
 
   // initialize guild config for main server
   const dbGuild = await db
@@ -37,4 +39,9 @@ export const initializeDbConnection = async () => {
   }
 };
 
-export default db;
+export const getDatabase = () => {
+  if (db === null) {
+    throw new Error('Database not initialized');
+  }
+  return db;
+};
