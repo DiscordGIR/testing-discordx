@@ -32,6 +32,8 @@
   },
   "misc": {
     "blootoothGuildId": "123",
-    "mainGuildId": "123"
+    "mainGuildId": "123",
+    "botOwnerId": "123",
+    "mainGuildOwnerId": "123"
   }
 }

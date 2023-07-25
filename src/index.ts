@@ -1,4 +1,7 @@
+import runMigrate from '@/db/migrations';
+import { blue, bold, yellow } from '@/utils/colors';
 import config from '@/utils/config';
+import db, { initializeDbConnection } from '@/utils/services/db';
 import logger from '@/utils/services/logger';
 import { dirname, importx } from '@discordx/importer';
 import type { Interaction, Message } from 'discord.js';
@@ -6,9 +9,6 @@ import { IntentsBitField } from 'discord.js';
 import { Client } from 'discordx';
 import * as dotenv from 'dotenv';
 import path from 'path';
-import runMigrate from './db/migrations';
-import { blue, bold, yellow } from './utils/colors';
-import db, { initializeDbConnection } from './utils/services/db';
 
 dotenv.config();
 

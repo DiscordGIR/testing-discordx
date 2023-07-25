@@ -36,6 +36,8 @@ const ConfigSchema = z.object({
   misc: z.object({
     blootoothGuildId: z.string(),
     mainGuildId: z.string(),
+    botOwnerId: z.string(),
+    mainGuildOwnerId: z.string(),
   }),
 });
 
